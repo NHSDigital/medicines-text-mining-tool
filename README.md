@@ -5,7 +5,7 @@ Medicines text mining tool
 
 ***Email: datascience@nhs.net***
 
-***To contact us raise an issue on Github or via email and will respond promptly.***
+***To contact us raise an issue on Github or via email and we will respond promptly.***
 
 # Clinical statement
 NHS Digital's Interoperable Medicines Programme has been involved in establishing a flow of medicine data from secondary care to improve medication safety, gain insights into overprescribing, understand the overuse of antibiotics, and improve the treatments related to COVID-19. Initial investigatory work with trusts and suppliers concluded that the standard for describing and coding medicines (dictionary of medicines and devices - dm+d) is only partially adopted by secondary care organisations. To enable any medicines data collection from individual hospitals to be comparable across England the programme has developed text mining functionality to map a hospital medicine description to the closest match in the dm+d standard (this functionality is known as Medicines Text Mining Tool - MTMT). Where there are too many variations between the medicine description and the closest dm+d description the match will appear as unmapped (exceeds a threshold). The mapped outputs can only be used for the secondary uses of data and must not be used for direct care (e.g. must not be used to map a hospital drug dictionary for direct care use).
