@@ -78,6 +78,6 @@ Locate and run the run_notebooks notebook. You will need to specify:
 - notebook_root: the location of this notebook
 		
 # Licence
-ePMA Autocoding codebase is released under the MIT License.
+Medicines Text Mining Tool codebase is released under the MIT License.
 
 The documentation is © Crown copyright and available under the terms of the [Open Government 3.0](https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/) licence.
