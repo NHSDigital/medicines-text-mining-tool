@@ -1,0 +1,39 @@
+# Databricks notebook source
+# MAGIC %run ../_modules/epma_global/function_test_suite
+
+# COMMAND ----------
+
+# MAGIC %run ./dea_258
+
+# COMMAND ----------
+
+from pyspark.sql.types import StructType, StructField, StringType, TimestampType, IntegerType, LongType
+
+# COMMAND ----------
+
+dbutils.widgets.text('db', 'epma_autocoding', 'db')
+DB = dbutils.widgets.get('db')
+assert DB
+
+# COMMAND ----------
+
+suite = FunctionTestSuite()
+
+@suite.add_test
+def test_add_fields_to_existing_tables():
+  df = spark.createDataFrame([('vtmid3', 'Urokinase 10,000'), ('vtmid4', 'Vancomycin powder'),], ['_id', 'text_col'])
+  asset_name = f'{DB}.test_add_fields_to_existing_tables'
+  create_table(df, asset_name, overwrite=True)
+  add_fields_to_existing_tables(DB, 'test_add_fields_to_existing_tables')
+  
+  schema_match_lookup_final = StructType([
+    StructField('_id', StringType(), True),
+    StructField('text_col', StringType(), True),  
+    StructField('version_id', StringType(), True),
+    StructField('match_term', StringType(), True),
+  ])
+  assert schema_match_lookup_final==spark.table(asset_name).schema
+  
+  drop_table(DB, 'test_add_fields_to_existing_tables')
+
+suite.run()
