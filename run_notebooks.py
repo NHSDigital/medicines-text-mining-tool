@@ -12,7 +12,7 @@ dbutils.widgets.text('notebook_root', '', 'notebook_root')
 # COMMAND ----------
 
 MATCH_LOOKUP_FINAL_VERSION = find_git_hash_regex(dbutils.widgets.get('notebook_root'))
-assert MATCH_LOOKUP_FINAL_VERSION
+# assert MATCH_LOOKUP_FINAL_VERSION
 
 SOURCE_DATASET = dbutils.widgets.get('source_dataset')
 assert SOURCE_DATASET
@@ -70,12 +70,12 @@ RUN_ID = get_new_run_id(MATCH_LOOKUP_FINAL_TABLE, 'match_id')
 PIPELINE_CONFIG = [
   { # Raw data inputs. Must be the zeroth stage
     'epma_table': RAW_INPUT_TABLE,
-    'vtm_table': 'dss_corporate.vtm',
-    'vmp_table': 'dss_corporate.vmp',
-    'amp_table': 'dss_corporate.amp',
+    'vtm_table': 'vtm',
+    'vmp_table': 'vmp',
+    'amp_table': 'amp',
     'parsed_vtm_table': '', # parsed vtm data doesn't exist                          
-    'parsed_vmp_table': 'dss_corporate.vmp_parsed',
-    'parsed_amp_table': 'dss_corporate.amp_parsed'
+    'parsed_vmp_table': 'vmp_parsed',
+    'parsed_amp_table': 'amp_parsed'
   },
   {
     'stage_id': 'exceptions_and_preprocessing',
@@ -122,16 +122,16 @@ PIPELINE_CONFIG = [
     'match_lookup_final_version': MATCH_LOOKUP_FINAL_VERSION,
     'run_id': RUN_ID,
     'execute': True
-  },
-  {
-    'stage_id': 'accuracy_calculating',
-    'notebook_location': './notebooks/4_accuracy_calculating/drivers/accuracy-calculating-driver',
-    'raw_data_required': True,
-    'input_table': MATCH_LOOKUP_FINAL_TABLE, # Table to read previous stage non-match input from
-    'output_table': ACCURACY_TABLE,
-    'ground_truth_table': GROUND_TRUTH_TABLE,
-    'execute': True
   }
+#   {
+#     'stage_id': 'accuracy_calculating',
+#     'notebook_location': './notebooks/4_accuracy_calculating/drivers/accuracy-calculating-driver',
+#     'raw_data_required': True,
+#     'input_table': MATCH_LOOKUP_FINAL_TABLE, # Table to read previous stage non-match input from
+#     'output_table': ACCURACY_TABLE,
+#     'ground_truth_table': GROUND_TRUTH_TABLE,
+#     'execute': True
+#   }
 ]
 
 # COMMAND ----------

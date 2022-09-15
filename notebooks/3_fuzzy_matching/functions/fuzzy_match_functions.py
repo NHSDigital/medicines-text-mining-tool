@@ -835,9 +835,9 @@ def full_fuzzy_matching_step(ref_data_store: ReferenceDataFormatter,
 
 # COMMAND ----------
 
-def get_non_moiety_words(table_form='dss_corporate.form',
-                         table_route='dss_corporate.route',
-                         table_unit='dss_corporate.unit_of_measure'):
+def get_non_moiety_words(table_form='default.form',
+                         table_route='default.route',
+                         table_unit='default.unit_of_measure'):
 
   # Non moiety words are found in these three tables.
   list_form = spark.table(table_form).select('DESC')

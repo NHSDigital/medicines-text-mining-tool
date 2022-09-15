@@ -25,7 +25,7 @@ class ReferenceDataFormatter():
   TEXT_COL = 'ref_description'
   ID_LEVEL_COL = 'id_level'
   
-  def __init__(self, ref_database: str='dss_corporate'):
+  def __init__(self, ref_database: str='default'):
     self._ref_database = ref_database
     
     self._amp = None

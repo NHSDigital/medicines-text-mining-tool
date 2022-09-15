@@ -53,7 +53,7 @@ df_vmp_parsed = RefDataStore.vmp_parsed
 df_amp_parsed = RefDataStore.amp_parsed
 
 # Get the list of doseforms, which are used in entity matching
-DOSE_FORM_LIST_BC = sc.broadcast([row.DESC for row in get_data('dss_corporate.form').select('DESC').distinct().collect()])
+DOSE_FORM_LIST_BC = sc.broadcast([row.DESC for row in get_data('default.form').select('DESC').distinct().collect()])
 
 # Entity match to amp reference data
 df_amp_match_output = entity_match(df_exact_non_match,
