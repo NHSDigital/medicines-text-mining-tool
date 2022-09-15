@@ -81,7 +81,11 @@ Various code changes are required to get the pipeline to run. Here are the chang
 
 With these changes done, various customisations are required in `run_notebooks.py` before running. In particular, within the cell that defines `PIPELINE_CONFIG` replace the names of the various tables with the names you setup when adding the reference tables. I put these in _without_ the database prefix. I.e. for me, `'vtm_table': 'vtm'` sufficed. I also commented out the final stage of the pipeline which computes accuracy as it was too fiddly to get data into the format in which accuracy could be easily calculated.
 
-Finally, the `BATCH_SIZE` parameter can be changed. The pipeline will _only_ process the first `BATCH_SIZE` records. However, it remembers what has been previously processed. If `BATCH_SIZE` is smaller than the number of records, the pipeline will need to be re-run multiple times.
+Finally, some parameters that appear as widgets at the top need to be changed:
+1. `db` change this to the name of your db (e.g. `default`)
+1. `BATCH_SIZE` (optional) parameter can be changed. The pipeline will _only_ process the first `BATCH_SIZE` records. However, it remembers what has been previously processed. If `BATCH_SIZE` is smaller than the number of records, the pipeline will need to be re-run multiple times.
+1. `raw_input_table` the name of the table with the queries in it
+1. `source_dataset` this should be set to `source_b`
 
 ## Output
 
