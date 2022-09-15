@@ -137,3 +137,17 @@ PIPELINE_CONFIG = [
 # COMMAND ----------
 
 run_matching_pipeline(PIPELINE_CONFIG)
+
+# COMMAND ----------
+
+match_table = spark.table("match_lookup_final")
+display(match_table.select("*"))
+
+# COMMAND ----------
+
+unmap_table = spark.table("unmappable")
+display(unmap_table.select("*"))
+
+# COMMAND ----------
+
+
