@@ -102,7 +102,7 @@ display(match_table.select("*"))
 
 and then click the three dots at the top left of the rendered table, and click "download all rows"
 
-## Performance Evaluation
+## Performance Evaluation - HAH
 
 ### Number of found matches
 
@@ -150,3 +150,34 @@ Looking at the matches correct at the VMP level (92), the following table shows 
 1. Where there was a dm+d code originally (AMP), the correct AMP was retreived 56% of the time.
 1. Where there was a dm+d code originally (AMP), the correct VMP was retreived 96% of the time.
 1. The majority of the matches come from the exact name matching tool either with the current, or a previous name.
+
+## Performance evaluation - Lloyds
+
+The unique names from the Lloyds file were extracted (with the rows containing `REGIME` removed). This resulted in 311 unique names.
+
+These were run throught he pipeline (note: final match and unmappable tables were defined with `_lloyds` postfix to keep the results separate from the HAH results).
+
+| Match level | Number | Percent |
+| --- | --- | --- |
+| APID | 2 | 0.6% |
+| VPID | 2 | 0.6% |
+| VTMID | 244 | 78% |
+| Unmappable | 63 | 20% |
+
+In comparison with the HAH results:
+
+1. A large proportion could not be mapped to anything.
+1. Of those that could be mapped, the majority are just at the VTM level, with only four names matchable at a more detailed level.
+
+The output of the pipeline provides reasons for not being able to map. Here are the reasons, and the counts:
+
+| Reason | Count |
+| --- | --- |
+| fuzzy_moiety_no_unique_vtm | 21 |
+| fuzzy_linked_tied_confidence_score | 5 |
+| fuzzy_moiety_low_score | 37 |
+
+Briefly, these translate as:
+1. `fuzzy_moiety_no_unique_vtm`: found matches, but the matches spanned multiple VTMs (i.e. too ambiguous).
+1. `fuzzy_linked_tied_confidence_score`: best matches had tied score, so too ambiguous.
+1. `fuzzy_moiety_low_score`: best match didn't reach the score threshold.
