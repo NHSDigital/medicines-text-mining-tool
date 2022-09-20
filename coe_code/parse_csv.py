@@ -45,6 +45,8 @@ def parse_lloyds(args: argparse.Namespace):
             writer.writerow(["medication_name_value", "form_in_text"])
         dmd = ''
         for name in names:
+            if "REGIME" in name:
+                continue
             if args.export_dmd:
                 writer.writerow([name, dmd])
             else:
