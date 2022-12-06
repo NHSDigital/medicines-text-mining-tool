@@ -36,7 +36,7 @@ def parse_lloyds(args: argparse.Namespace):
         heads = next(reader)
         for line in reader:
             lines.append(line)
-    names = set([l[1] for l in lines])
+    names = set([l[args.input_name_column] for l in lines])
     with open(args.output_file, 'w', encoding='utf-8', newline='') as output_file:
         writer = csv.writer(output_file)
         if args.export_dmd:
@@ -95,6 +95,14 @@ def main():
         action="store_true",
         dest="export_dmd",
         help="Whether or not to include a dm+d column in the output"
+    )
+    parser.add_argument(
+        "-c", "--name-column",
+        type=int,
+        required=True,
+        action="store",
+        dest="input_name_column",
+        help="Column index of the name"
     )
     args = parser.parse_args()
     print(args)
