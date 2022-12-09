@@ -6,6 +6,7 @@ VMP and each VMP has a VTM added to the file
 # System imports
 import logging
 import os
+import glob
 
 # Third Party imports
 import argparse
@@ -52,8 +53,9 @@ def get_amp_dict() -> dict:
     is the APID and the value is the dictionary of other values. '''
 
     local_logger.info("Loading AMP data.")
+    amp_filename = glob.glob(os.path.join(args.xml_files_path, 'f_amp2_*.xml'))[0]
     with open(
-        os.path.join(args.xml_files_path,'f_amp2_3250822.xml'),
+        amp_filename,
         'r',
         encoding='utf-8'
         ) as file:
@@ -194,7 +196,7 @@ def add_addiitional_info():
     local_logger.info("Searching APIDs and adding VPIDs.")
     for i in pivoted_input.index:
         apid = pivoted_input.loc[i, 'APID']
-        if apid is not None:
+        if apid is not np.nan:
             vpid = get_vmp_from_amp(apid, amp_dict)
             pivoted_input.loc[i,'VPID'] = vpid
 
@@ -204,7 +206,7 @@ def add_addiitional_info():
     local_logger.info("Searching VPIDs and adding VTMIDs.")
     for i in pivoted_input.index:
         vpid = pivoted_input.loc[i, 'VPID']
-        if vpid is not None:
+        if vpid is not np.nan:
             vtm = get_vtm_from_vmp(vpid, vmp_dict)
             pivoted_input.loc[i, 'VTMID'] = vtm
 
